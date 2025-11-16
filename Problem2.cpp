@@ -1,17 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Meeting {
+struct Meeting{
     int id;
     int priority;
     int duration;
     map<string,int> equipment_required;
 };
 
-double computeEquipmentSatisfaction(const map<string,int>& required, const map<string,int>& available) {
+double computeEquipmentSatisfaction(const map<string,int>& required, const map<string,int>& available){
     double ratio = 1.0;
     for (auto &[eq, req] : required) {
-        if (available.find(eq) == available.end() || available.at(eq) == 0) {
+        if (available.find(eq) == available.end() || available.at(eq) == 0){
             ratio = min(ratio, 0.0);
         } else {
             ratio = min(ratio, (double)available.at(eq)/req);
@@ -29,7 +29,7 @@ int main() {
     };
 
     vector<pair<double,int>> ratio_index;
-    for (int i = 0; i < meetings.size(); ++i) {
+    for (int i = 0; i < meetings.size(); ++i){
         int total_req = 0;
         for (auto &[eq, cnt] : meetings[i].equipment_required) total_req += cnt;
         double sat = computeEquipmentSatisfaction(meetings[i].equipment_required, equipment_available);
